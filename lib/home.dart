@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -64,6 +63,26 @@ class _HomePageState
     'https://i.pinimg.com/736x/25/9b/f2/259bf2e9bc4d1b85535ee8d947007a65.jpg',
     'https://i.pinimg.com/1200x/db/a5/2a/dba52a6e2cd2f5832b748214291075ee.jpg',
     'https://i.pinimg.com/1200x/ea/88/51/ea885190bf37c9b2152e8141447e46bc.jpg',
+  ];
+
+  List<
+    String
+  >
+  watches = [
+    'https://i.pinimg.com/1200x/08/e7/0a/08e70a94d43b007efda8ef04962e4895.jpg',
+    'https://i.pinimg.com/736x/e8/d6/77/e8d6771805bf84efe55b70a92091119c.jpg',
+    'https://i.pinimg.com/736x/ae/b3/ff/aeb3ff0194b7b3fd98e59c0f82f9dffe.jpg',
+    'https://i.pinimg.com/736x/a2/ec/05/a2ec056d4e14add4b5dc248f61c949d0.jpg',
+  ];
+
+  List<
+    String
+  >
+  bags = [
+    'https://i.pinimg.com/736x/0e/6a/24/0e6a24a0524c589f60c758c851ebdcd7.jpg',
+    'https://i.pinimg.com/1200x/8e/cf/15/8ecf15ebc1a4329334b033e8cea40217.jpg',
+    'https://i.pinimg.com/1200x/c3/67/8f/c3678fc8e2353f67156a64dac290e37d.jpg',
+    'https://i.pinimg.com/736x/fe/f0/5e/fef05effedef8cb23e7348736d3fd74a.jpg',
   ];
 
   @override
@@ -151,28 +170,35 @@ class _HomePageState
                     crossAxisCount: 2,
                     mainAxisSpacing: 20.h,
                     crossAxisSpacing: 20.w,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      _gridCategory(
-                        'Hoodies',
-                        hoodies,
+                      CategoryGridWidget(
+                        title: 'Hoodies',
+                        images: hoodies,
                       ),
-                      _gridCategory(
-                        'Shoes',
-                        shoes,
+                      CategoryGridWidget(
+                        title: 'Shoes',
+                        images: shoes,
                       ),
-                      _gridCategory(
-                        'Shirts',
-                        shirts,
+                      CategoryGridWidget(
+                        title: 'Shirts',
+                        images: shirts,
                       ),
-                      _gridCategory(
-                        'Pants',
-                        pants,
+                      CategoryGridWidget(
+                        title: 'Pants',
+                        images: pants,
+                      ),
+                      CategoryGridWidget(
+                        title: 'Bags',
+                        images: bags,
+                      ),
+                      CategoryGridWidget(
+                        title: 'Watches',
+                        images: watches,
                       ),
                     ],
                   ),
                 ),
-
                 SizedBox(
                   height: 24.h,
                 ),
@@ -186,21 +212,85 @@ class _HomePageState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _circleIcon(
-                      "https://i.pinimg.com/736x/0e/6a/24/0e6a24a0524c589f60c758c851ebdcd7.jpg",
+                      bags[0],
                     ),
                     _circleIcon(
-                      "https://i.pinimg.com/1200x/08/e7/0a/08e70a94d43b007efda8ef04962e4895.jpg",
+                      watches[0],
                     ),
                     _circleIcon(
-                      "https://i.pinimg.com/1200x/a5/22/90/a52290bfc7b6ed20e7da47719ae362a3.jpg",
+                      shirts[0],
                     ),
                     _circleIcon(
-                      "https://i.pinimg.com/1200x/a1/7d/9a/a17d9a900eea4d103ca31d2a3d25483c.jpg",
+                      pants[0],
                     ),
                     _circleIcon(
-                      "https://i.pinimg.com/1200x/d4/08/b4/d408b4642bd57481ac5e3e972fb8d8e6.jpg",
+                      hoodies[0],
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 24.h,
+                ),
+                _sectionTitle(
+                  'New Items',
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                SizedBox(
+                  height: 200.h,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      _itemWidget(
+                        shoes[0],
+                        'Lorem ipsum dolor sit.',
+                        "Rs 1700",
+                      ),
+                      _itemWidget(
+                        shoes[1],
+                        'Lorem ipsum dolor sit.',
+                        "Rs 1700",
+                      ),
+                      _itemWidget(
+                        shoes[2],
+                        'Lorem ipsum dolor sit.',
+                        "Rs 1700",
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 24.h,
+                ),
+                _sectionTitle(
+                  'Most Popular',
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                SizedBox(
+                  height: 200.h,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      _itemWidget(
+                        shoes[0],
+                        'Lorem ipsum dolor sit.',
+                        "Rs 1700",
+                      ),
+                      _itemWidget(
+                        shoes[1],
+                        'Lorem ipsum dolor sit.',
+                        "Rs 1700",
+                      ),
+                      _itemWidget(
+                        shoes[2],
+                        'Lorem ipsum dolor sit.',
+                        "Rs 1700",
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -266,6 +356,17 @@ class _HomePageState
         color: Color(
           0xFFF8F8F8,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(
+              0,
+              3,
+            ),
+          ),
+        ],
       ),
       padding: EdgeInsets.all(
         8.w,
@@ -295,35 +396,108 @@ class _HomePageState
   }
 
   Widget
-  _gridCategory(
+  _itemWidget(
     String
-    title,
-    List<
-      String
-    >
-    images,
+    link,
+    String
+    description,
+    String
+    price,
   ) {
-    return SizedBox(
+    return Padding(
+      padding: EdgeInsets.only(
+        right: 16.w,
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 140.h,
+            width: 140.w,
+            child: Image.network(
+              link,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Text(
+            description,
+            style: TextStyle(
+              fontFamily: 'NunitoSans',
+              fontSize: 12.sp,
+            ),
+            softWrap: true,
+          ),
+          Text(
+            price,
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 17.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CategoryGridWidget
+    extends
+        StatelessWidget {
+  final String
+  title;
+  final List<
+    String
+  >
+  images;
+
+  const CategoryGridWidget({
+    super.key,
+    required this.title,
+    required this.images,
+  });
+
+  @override
+  Widget
+  build(
+    BuildContext
+    context,
+  ) {
+    return Container(
       width: 165.w,
       height: 192.h,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(
+              0,
+              3,
+            ),
+          ),
+        ],
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          24.r,
+        ),
+      ),
       child: Column(
         children: [
           SizedBox(
             height: 150.h,
             child: GridView.count(
               crossAxisCount: 2,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               mainAxisSpacing: 6,
               crossAxisSpacing: 6,
               children: List.generate(
                 4,
                 (
                   index,
-                ) => Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      5.r,
-                    ),
+                ) => ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                    24.r,
                   ),
                   child: Image.network(
                     images[index],
