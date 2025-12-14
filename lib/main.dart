@@ -1,3 +1,4 @@
+import 'package:ecommerce/home.dart';
 import 'package:ecommerce/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +30,7 @@ class MainApp
       ),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: OnboardingPage(),
+        home: HomePage(),
       ),
     );
   }
