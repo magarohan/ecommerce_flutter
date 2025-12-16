@@ -1,5 +1,6 @@
 import 'package:ecommerce/home.dart';
 import 'package:ecommerce/onboarding.dart';
+import 'package:ecommerce/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

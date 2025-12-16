@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'package:ecommerce/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Product {
   final String
@@ -17,6 +20,19 @@ class Product {
     required this.price,
     this.description,
   });
+
+  Map<
+    String,
+    dynamic
+  >
+  toJson() {
+    return {
+      'image': image,
+      'name': name,
+      'price': price,
+      'description': description,
+    };
+  }
 }
 
 class HomePage
@@ -42,6 +58,23 @@ class _HomePageState
   int
   _currentIndex =
       0;
+
+  Future<
+    void
+  >
+  _saveProduct(
+    Product
+    product,
+  ) async {
+    final prefs =
+        await SharedPreferences.getInstance();
+    await prefs.setString(
+      'selected_product',
+      jsonEncode(
+        product.toJson(),
+      ),
+    );
+  }
 
   final List<
     Product
@@ -244,21 +277,23 @@ class _HomePageState
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search',
-                    prefixIcon: const Icon(
-                      Icons.search,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                        12.r,
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      prefixIcon: const Icon(
+                        Icons.search,
                       ),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Color(
-                      0xFFF8F8F8,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          12.r,
+                        ),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: const Color(
+                        0xFFF8F8F8,
+                      ),
                     ),
                   ),
                 ),
@@ -275,7 +310,7 @@ class _HomePageState
             ),
             GridView(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 20.h,
@@ -414,6 +449,127 @@ class _HomePageState
       ),
     );
   }
+
+  Widget
+  _itemCard(
+    Product
+    product,
+  ) {
+    return InkWell(
+      onTap: () async {
+        await _saveProduct(
+          product,
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder:
+                (
+                  _,
+                ) => const ProductPage(),
+          ),
+        );
+      },
+      child: SizedBox(
+        width: 140.w,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(
+                16.r,
+              ),
+              child: Image.network(
+                product.image,
+                height: 120.h,
+                width: 140.w,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(
+              height: 6.h,
+            ),
+            Text(
+              product.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            Text(
+              product.description ??
+                  '',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: Colors.grey,
+              ),
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            Text(
+              'Rs ${product.price}',
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget
+  _circleIcon(
+    Product
+    product,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(
+              0.2,
+            ),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(
+              0,
+              3,
+            ),
+          ),
+        ],
+      ),
+      child: CircleAvatar(
+        radius: 28.w,
+        backgroundImage: NetworkImage(
+          product.image,
+        ),
+      ),
+    );
+  }
+
+  Widget
+  _sectionTitle(
+    String
+    text,
+  ) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 21.sp,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
 }
 
 class CategoryGridWidget
@@ -509,111 +665,4 @@ class CategoryGridWidget
       ),
     );
   }
-}
-
-Widget
-_circleIcon(
-  Product
-  product,
-) {
-  return Container(
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(
-            0.2,
-          ),
-          spreadRadius: 2,
-          blurRadius: 5,
-          offset: const Offset(
-            0,
-            3,
-          ),
-        ),
-      ],
-    ),
-    child: CircleAvatar(
-      radius: 28.w,
-      backgroundImage: NetworkImage(
-        product.image,
-      ),
-    ),
-  );
-}
-
-Widget
-_sectionTitle(
-  String
-  text,
-) {
-  return Text(
-    text,
-    style: TextStyle(
-      fontSize: 21.sp,
-      fontWeight: FontWeight.bold,
-    ),
-  );
-}
-
-Widget
-_itemCard(
-  Product
-  product,
-) {
-  return SizedBox(
-    width:
-        140.w,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(
-            16.r,
-          ),
-          child: Image.network(
-            product.image,
-            height: 120.h,
-            width: 140.w,
-            fit: BoxFit.cover,
-          ),
-        ),
-        SizedBox(
-          height: 6.h,
-        ),
-        Text(
-          product.name,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontSize: 15.sp,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(
-          height: 2.h,
-        ),
-        Text(
-          product.description ??
-              '',
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontSize: 12.sp,
-            color: Colors.grey,
-          ),
-        ),
-        SizedBox(
-          height: 2.h,
-        ),
-        Text(
-          '\$${product.price}',
-          style: TextStyle(
-            fontSize: 14.sp,
-            color: Colors.black87,
-          ),
-        ),
-      ],
-    ),
-  );
 }
