@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ecommerce/cart.dart';
 import 'package:ecommerce/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -413,13 +414,28 @@ class _HomePageState
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
+        currentIndex: 0,
         onTap:
             (
-              i,
-            ) => setState(
-              () => _currentIndex = i,
-            ),
+              index,
+            ) {
+              if (index ==
+                  1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (
+                          context,
+                        ) => CartPage(),
+                  ),
+                );
+              }
+            },
+        selectedItemColor: const Color(
+          0xFF004CFF,
+        ),
+        unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
@@ -429,15 +445,9 @@ class _HomePageState
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.shopping_bag,
+              Icons.shopping_cart,
             ),
-            label: 'Orders',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite,
-            ),
-            label: 'Wishlist',
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(
