@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ecommerce/cart.dart';
 import 'package:ecommerce/product.dart';
+import 'package:ecommerce/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -428,6 +429,18 @@ class _HomePageState
                         (
                           context,
                         ) => CartPage(),
+                  ),
+                );
+              }
+              if (index ==
+                  2) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (
+                          context,
+                        ) => ProfilePage(),
                   ),
                 );
               }
