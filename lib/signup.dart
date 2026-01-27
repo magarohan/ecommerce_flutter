@@ -38,7 +38,7 @@ class _SignupPageState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 80.h,
+                height: 79.h,
               ),
               Align(
                 alignment: Alignment.centerLeft,
