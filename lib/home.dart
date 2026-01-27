@@ -57,10 +57,6 @@ class _HomePageState
         State<
           HomePage
         > {
-  int
-  _currentIndex =
-      0;
-
   Future<
     void
   >
@@ -483,6 +479,7 @@ class _HomePageState
         await _saveProduct(
           product,
         );
+        if (!mounted) return;
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -559,8 +556,8 @@ class _HomePageState
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(
-              0.2,
+            color: Colors.grey.withValues(
+              alpha: 0.2,
             ),
             spreadRadius: 2,
             blurRadius: 5,
@@ -624,8 +621,8 @@ class CategoryGridWidget
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(
-              0.2,
+            color: Colors.grey.withValues(
+              alpha: 0.2,
             ),
             spreadRadius: 2,
             blurRadius: 5,

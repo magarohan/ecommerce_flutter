@@ -1,6 +1,7 @@
 import 'package:ecommerce/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage
     extends
@@ -22,6 +23,52 @@ class _LoginPageState
         State<
           LoginPage
         > {
+  final emailController =
+      TextEditingController();
+  final passwordController =
+      TextEditingController();
+
+  Future<
+    void
+  >
+  login() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder:
+              (
+                _,
+              ) => const HomePage(),
+        ),
+      );
+    } catch (
+      e
+    ) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.toString(),
+          ),
+        ),
+      );
+    }
+  }
+
+  @override
+  void
+  dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget
   build(
@@ -43,6 +90,7 @@ class _LoginPageState
               Align(
                 alignment: Alignment.centerLeft,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Login',
@@ -54,7 +102,6 @@ class _LoginPageState
                     ),
                     Text(
                       'Good to see you again!',
-                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'NunitoSans',
                         fontSize: 18.sp,
@@ -81,6 +128,8 @@ class _LoginPageState
                   ),
                 ),
                 child: TextField(
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: 20.w,
@@ -112,6 +161,7 @@ class _LoginPageState
                   ),
                 ),
                 child: TextField(
+                  controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
@@ -148,17 +198,7 @@ class _LoginPageState
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            ((
-                              context,
-                            ) => const HomePage()),
-                      ),
-                    );
-                  },
+                  onPressed: login,
                   child: Text(
                     "Login",
                     style: TextStyle(

@@ -26,12 +26,13 @@ class _ProfilePageState
   Widget
   _recentlyViewed() {
     return Container(
+      height: 200.h,
+      width: 100.w,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(
-              0.5,
+            color: Colors.grey.withValues(
+              alpha: 0.5,
             ),
             spreadRadius: 2.r,
             blurRadius: 5.r,
@@ -42,11 +43,11 @@ class _ProfilePageState
           ),
         ],
       ),
-      child: CircleAvatar(
-        radius: 25.r,
-        backgroundImage: const NetworkImage(
+      child: Image(
+        image: NetworkImage(
           'https://i.pinimg.com/736x/b3/0e/c0/b30ec0d84dbc76e453d74554c796d9de.jpg',
         ),
+        fit: BoxFit.cover,
       ),
     );
   }
@@ -128,7 +129,7 @@ class _ProfilePageState
                 height: 12.h,
               ),
               Container(
-                height: 70.h,
+                height: 80.h,
                 width: 335.w,
                 padding: EdgeInsets.all(
                   8.w,
@@ -197,7 +198,6 @@ class _ProfilePageState
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _recentlyViewed(),
                   _recentlyViewed(),
                   _recentlyViewed(),
                   _recentlyViewed(),
