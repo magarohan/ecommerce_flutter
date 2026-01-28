@@ -7,11 +7,13 @@ environment:
   sdk: ^3.10.3
 
 dependencies:
+  firebase_app_check: ^0.4.1+4
   firebase_auth: ^6.1.4
   firebase_core: ^4.3.0
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.9.3
+  get: ^4.7.3
   google_fonts: ^6.3.3
   shared_preferences: ^2.5.4
 

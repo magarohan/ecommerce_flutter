@@ -159,13 +159,20 @@ class _SignupPageState
               SizedBox(
                 height: 24.h,
               ),
-              Text(
-                'Cancel',
-                style: TextStyle(
-                  fontFamily: 'NunitoSans',
-                  fontSize: 16.sp,
-                  color: const Color(
-                    0xFF202020,
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(
+                    context,
+                  );
+                },
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    fontFamily: 'NunitoSans',
+                    fontSize: 16.sp,
+                    color: const Color(
+                      0xFF202020,
+                    ),
                   ),
                 ),
               ),

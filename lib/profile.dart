@@ -1,7 +1,9 @@
 import 'package:ecommerce/cart.dart';
+import 'package:ecommerce/login.dart';
 import 'package:ecommerce/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage
     extends
@@ -23,6 +25,22 @@ class _ProfilePageState
         State<
           ProfilePage
         > {
+  Future<
+    void
+  >
+  _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder:
+            (
+              _,
+            ) => const LoginPage(),
+      ),
+    );
+  }
+
   Widget
   _recentlyViewed() {
     return Container(
@@ -239,6 +257,37 @@ class _ProfilePageState
                     'To Review',
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(
+                    204,
+                    255,
+                    0,
+                    0,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    18.r,
+                  ),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    _signOut();
+                  },
+                  child: Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontFamily: 'Railway',
+                      fontSize: 16.sp,
+                      color: const Color(
+                        0xFFFFFFFF,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

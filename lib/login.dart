@@ -1,4 +1,6 @@
 import 'package:ecommerce/home.dart';
+import 'package:ecommerce/reset.dart';
+import 'package:ecommerce/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -179,8 +181,34 @@ class _LoginPageState
                   ),
                 ),
               ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (
+                              context,
+                            ) => const ResetPasswordPage(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                      fontFamily: 'NunitoSans',
+                      fontSize: 16.sp,
+                      color: const Color(
+                        0xFF202020,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
-                height: 50.h,
+                height: 25.h,
               ),
               SizedBox(
                 width: double.infinity,
@@ -214,15 +242,43 @@ class _LoginPageState
               SizedBox(
                 height: 24.h,
               ),
-              Text(
-                'Cancel',
-                style: TextStyle(
-                  fontFamily: 'NunitoSans',
-                  fontSize: 16.sp,
-                  color: const Color(
-                    0xFF202020,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Not a member?',
+                    style: TextStyle(
+                      fontFamily: 'NunitoSans',
+                      fontSize: 16.sp,
+                      color: const Color(
+                        0xFF202020,
+                      ),
+                    ),
                   ),
-                ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (
+                                context,
+                              ) => const SignupPage(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontFamily: 'NunitoSans',
+                        fontSize: 16.sp,
+                        color: const Color(
+                          0xFF004CFF,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
