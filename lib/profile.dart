@@ -3,42 +3,24 @@ import 'package:ecommerce/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProfilePage
-    extends
-        StatefulWidget {
-  const ProfilePage({
-    super.key,
-  });
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<
-    ProfilePage
-  >
-  createState() =>
-      _ProfilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState
-    extends
-        State<
-          ProfilePage
-        > {
-  Widget
-  _recentlyViewed() {
+class _ProfilePageState extends State<ProfilePage> {
+  Widget _recentlyViewed() {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(
-              0.5,
-            ),
+            color: Colors.grey.withValues(alpha: 0.5),
             spreadRadius: 2.r,
             blurRadius: 5.r,
-            offset: Offset(
-              0,
-              3.h,
-            ),
+            offset: Offset(0, 3.h),
           ),
         ],
       ),
@@ -51,21 +33,13 @@ class _ProfilePageState
     );
   }
 
-  Widget
-  _orders(
-    String
-    type,
-  ) {
+  Widget _orders(String type) {
     return Container(
       height: 35.h,
       width: 86.w,
       decoration: BoxDecoration(
-        color: const Color(
-          0xFFE5EBFC,
-        ),
-        borderRadius: BorderRadius.circular(
-          18.r,
-        ),
+        color: const Color(0xFFE5EBFC),
+        borderRadius: BorderRadius.circular(18.r),
       ),
       child: Center(
         child: Text(
@@ -73,9 +47,7 @@ class _ProfilePageState
           style: TextStyle(
             fontFamily: 'Railway',
             fontSize: 16.sp,
-            color: const Color(
-              0xFF0042E0,
-            ),
+            color: const Color(0xFF0042E0),
           ),
         ),
       ),
@@ -83,22 +55,14 @@ class _ProfilePageState
   }
 
   @override
-  Widget
-  build(
-    BuildContext
-    context,
-  ) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 16.w,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             children: [
-              SizedBox(
-                height: 20.h,
-              ),
+              SizedBox(height: 20.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -116,26 +80,17 @@ class _ProfilePageState
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
-                      Icons.edit,
-                      size: 22.sp,
-                    ),
+                    icon: Icon(Icons.edit, size: 22.sp),
                     onPressed: () {},
                   ),
                 ],
               ),
-              SizedBox(
-                height: 12.h,
-              ),
+              SizedBox(height: 12.h),
               Container(
                 height: 70.h,
                 width: 335.w,
-                padding: EdgeInsets.all(
-                  8.w,
-                ),
-                color: const Color(
-                  0xFFF8F8F8,
-                ),
+                padding: EdgeInsets.all(8.w),
+                color: const Color(0xFFF8F8F8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -151,9 +106,7 @@ class _ProfilePageState
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
-                            height: 4.h,
-                          ),
+                          SizedBox(height: 4.h),
                           Text(
                             'Lorem ipsum dolor sit amet',
                             style: TextStyle(
@@ -169,17 +122,13 @@ class _ProfilePageState
                       child: Icon(
                         Icons.arrow_forward,
                         size: 16.sp,
-                        color: const Color(
-                          0xFF004BFE,
-                        ),
+                        color: const Color(0xFF004BFE),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 18.h,
-              ),
+              SizedBox(height: 18.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -191,9 +140,7 @@ class _ProfilePageState
                   ),
                 ),
               ),
-              SizedBox(
-                height: 12.h,
-              ),
+              SizedBox(height: 12.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -203,9 +150,7 @@ class _ProfilePageState
                   _recentlyViewed(),
                 ],
               ),
-              SizedBox(
-                height: 25.h,
-              ),
+              SizedBox(height: 25.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -217,27 +162,15 @@ class _ProfilePageState
                   ),
                 ),
               ),
-              SizedBox(
-                height: 12.h,
-              ),
+              SizedBox(height: 12.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _orders(
-                    'To Pay',
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  _orders(
-                    'To Receive',
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  _orders(
-                    'To Review',
-                  ),
+                  _orders('To Pay'),
+                  SizedBox(width: 10.w),
+                  _orders('To Receive'),
+                  SizedBox(width: 10.w),
+                  _orders('To Review'),
                 ],
               ),
             ],
@@ -246,58 +179,29 @@ class _ProfilePageState
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 2,
-        onTap:
-            (
-              index,
-            ) {
-              if (index ==
-                  1) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (
-                          context,
-                        ) => const CartPage(),
-                  ),
-                );
-              }
-              if (index ==
-                  0) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (
-                          context,
-                        ) => const HomePage(),
-                  ),
-                );
-              }
-            },
-        selectedItemColor: const Color(
-          0xFF004CFF,
-        ),
+        onTap: (index) {
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CartPage()),
+            );
+          }
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          }
+        },
+        selectedItemColor: const Color(0xFF004CFF),
         unselectedItemColor: Colors.grey,
         items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_cart,
-            ),
+            icon: Icon(Icons.shopping_cart),
             label: 'Cart',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            label: 'Profile',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );
