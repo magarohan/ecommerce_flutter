@@ -1,7 +1,7 @@
+import 'package:ecommerce/screens/auth/login.dart';
+import 'package:ecommerce/screens/auth/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'auth/signup.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -82,7 +82,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
                     child: Container(
                       height: 32.h,
                       width: 32.w,
